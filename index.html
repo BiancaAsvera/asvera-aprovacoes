@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aprovação de Planejamento — Savera Comunicação</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Inter', sans-serif; background: #F7F7F5; color: #1a1a1a; min-height: 100vh; }
+  .page { max-width: 680px; margin: 0 auto; padding: 2.5rem 1.25rem 4rem; }
+  .header { margin-bottom: 2rem; }
+  .logo { font-size: 11px; font-weight: 600; color: #888; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1rem; }
+  .client-name { font-size: 26px; font-weight: 600; color: #111; margin-bottom: 0.2rem; }
+  .period { font-size: 15px; color: #666; margin-bottom: 1.25rem; }
+  .deadline-bar { background: #FEF3CD; border: 1px solid #F5D97A; border-radius: 10px; padding: 12px 16px; display: flex; align-items: flex-start; gap: 10px; }
+  .deadline-bar i { font-size: 18px; color: #B8860B; flex-shrink: 0; margin-top: 1px; }
+  .deadline-text { font-size: 14px; color: #7A5A00; line-height: 1.5; }
+  .deadline-text strong { font-weight: 600; }
+  .section-header { margin: 2rem 0 0.75rem; }
+  .section-label { font-size: 11px; font-weight: 600; color: #888; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.5rem; }
+  .progress-wrap { height: 5px; background: #E5E5E0; border-radius: 99px; margin-bottom: 0.4rem; }
+  .progress-fill { height: 5px; border-radius: 99px; background: #1D9E75; transition: width 0.4s ease; width: 0%; }
+  .progress-label { font-size: 13px; color: #888; margin-bottom: 1.25rem; }
+  .post-card { background: #fff; border: 1px solid #E8E8E3; border-radius: 14px; padding: 1.25rem; margin-bottom: 0.875rem; transition: border-color 0.2s, background 0.2s; }
+  .post-card.approved { border-color: #1D9E75; background: #F4FBF8; }
+  .post-card.needs-adjust { border-color: #378ADD; background: #F0F7FF; }
+  .post-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 1rem; }
+  .post-title { font-size: 15px; font-weight: 600; color: #111; line-height: 1.4; }
+  .badge { font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 20px; flex-shrink: 0; white-space: nowrap; }
+  .badge-reels { background: #E6F1FB; color: #0C447C; }
+  .badge-carrossel { background: #EAF3DE; color: #27500A; }
+  .badge-story { background: #FBEAF0; color: #72243E; }
+  .badge-imagem { background: #F1EFE8; color: #444441; }
+  .post-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 20px; margin-bottom: 1rem; }
+  .field { display: flex; flex-direction: column; gap: 3px; }
+  .field-label { font-size: 10px; font-weight: 600; color: #aaa; text-transform: uppercase; letter-spacing: 0.07em; }
+  .field-value { font-size: 14px; color: #333; }
+  .field-full { grid-column: 1 / -1; }
+  .field-dev { background: #F7F7F5; border-radius: 8px; padding: 10px 12px; }
+  .field-dev .field-value { font-size: 13px; color: #555; line-height: 1.65; }
+  .material-block { grid-column: 1 / -1; background: #FEF3CD; border: 1px solid #F5D97A; border-radius: 8px; padding: 10px 12px; }
+  .material-block .field-label { color: #7A5A00; margin-bottom: 4px; }
+  .material-desc-text { font-size: 13px; color: #633806; line-height: 1.5; margin-bottom: 6px; }
+  .material-prazo { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 600; color: #7A5A00; background: #fff; border: 1px solid #F5D97A; padding: 3px 10px; border-radius: 20px; margin-top: 2px; }
+  .material-nao { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 500; padding: 4px 10px; border-radius: 20px; background: #F1EFE8; color: #5F5E5A; }
+  .divider { height: 1px; background: #F0F0EC; margin: 1rem 0; }
+  .post-actions { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+  .btn-approve { font-size: 13px; font-weight: 600; padding: 8px 16px; border-radius: 8px; cursor: pointer; border: none; display: inline-flex; align-items: center; gap: 6px; background: #1D9E75; color: #fff; transition: opacity 0.15s; }
+  .btn-approve:hover:not(:disabled) { opacity: 0.85; }
+  .btn-approve:disabled { opacity: 0.65; cursor: default; }
+  .btn-adjust { font-size: 13px; font-weight: 500; padding: 8px 16px; border-radius: 8px; cursor: pointer; background: #fff; color: #333; border: 1px solid #D5D5D0; display: inline-flex; align-items: center; gap: 6px; transition: background 0.15s; }
+  .btn-adjust:hover { background: #F7F7F5; }
+  .btn-adjust.active { background: #E6F1FB; color: #0C447C; border-color: #378ADD; }
+  .status-chip { font-size: 12px; font-weight: 500; padding: 4px 10px; border-radius: 20px; margin-left: auto; display: inline-flex; align-items: center; gap: 4px; }
+  .chip-approved { background: #EAF3DE; color: #27500A; }
+  .chip-adjust { background: #E6F1FB; color: #0C447C; }
+  .adjust-panel { display: none; margin-top: 1rem; border-top: 1px solid #F0F0EC; padding-top: 1rem; }
+  .adjust-panel.open { display: block; }
+  .adjust-panel label { font-size: 13px; color: #666; display: block; margin-bottom: 6px; }
+  .adjust-panel textarea { width: 100%; min-height: 90px; font-size: 13px; font-family: 'Inter', sans-serif; padding: 10px 12px; border: 1px solid #D5D5D0; border-radius: 8px; background: #fff; color: #111; resize: vertical; outline: none; transition: border-color 0.15s; }
+  .adjust-panel textarea:focus { border-color: #378ADD; }
+  .btn-send-adjust { margin-top: 8px; font-size: 13px; font-weight: 600; padding: 8px 16px; border-radius: 8px; cursor: pointer; background: #1D3557; color: #fff; border: none; transition: opacity 0.15s; }
+  .btn-send-adjust:hover { opacity: 0.85; }
+  .adjust-sent { font-size: 13px; color: #185FA5; display: flex; align-items: flex-start; gap: 6px; background: #E6F1FB; padding: 10px 12px; border-radius: 8px; line-height: 1.5; }
+  .adjust-sent i { flex-shrink: 0; margin-top: 1px; }
+  .summary-block { display: none; background: #fff; border: 1px solid #E8E8E3; border-radius: 14px; padding: 1.5rem; margin-top: 2rem; }
+  .summary-title { font-size: 16px; font-weight: 600; color: #111; margin-bottom: 1rem; }
+  .summary-row { display: flex; justify-content: space-between; align-items: center; font-size: 14px; color: #666; padding: 8px 0; border-bottom: 1px solid #F0F0EC; }
+  .summary-row:last-of-type { border-bottom: none; margin-bottom: 1rem; }
+  .summary-row span:last-child { font-weight: 600; color: #111; }
+  .btn-finalize { width: 100%; font-size: 15px; font-weight: 600; padding: 14px; border-radius: 10px; cursor: pointer; background: #1D9E75; color: #fff; border: none; display: flex; align-items: center; justify-content: center; gap: 8px; transition: opacity 0.15s; }
+  .btn-finalize:disabled { opacity: 0.35; cursor: not-allowed; }
+  .btn-finalize:hover:not(:disabled) { opacity: 0.88; }
+  .finalize-hint { font-size: 12px; color: #aaa; text-align: center; margin-top: 8px; }
+  .sending-overlay { display: none; text-align: center; padding: 2rem; }
+  .sending-overlay i { font-size: 36px; color: #1D9E75; margin-bottom: 12px; display: block; }
+  .sending-overlay p { font-size: 15px; color: #555; }
+  .final-success { display: none; background: #F4FBF8; border: 1px solid #1D9E75; border-radius: 14px; padding: 2.5rem 2rem; text-align: center; margin-top: 2rem; }
+  .final-success i { font-size: 48px; color: #1D9E75; margin-bottom: 12px; display: block; }
+  .final-success h2 { font-size: 20px; font-weight: 600; color: #0F6E56; margin-bottom: 8px; }
+  .final-success p { font-size: 14px; color: #3B6D11; line-height: 1.6; }
+  .error-msg { display: none; background: #FFF0F0; border: 1px solid #F09595; border-radius: 10px; padding: 1rem 1.25rem; margin-top: 1rem; font-size: 14px; color: #A32D2D; text-align: center; }
+  .footer { margin-top: 3rem; text-align: center; font-size: 12px; color: #bbb; }
+  @media (max-width: 500px) {
+    .post-fields { grid-template-columns: 1fr; }
+    .field-full { grid-column: 1; }
+    .post-actions { flex-direction: column; align-items: stretch; }
+    .status-chip { margin-left: 0; justify-content: center; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="header">
+    <div class="logo">Savera Comunicação</div>
+    <div class="client-name">WOWLIVE</div>
+    <div class="period">Planejamento de Julho 2026 &mdash; 5 posts</div>
+    <div class="deadline-bar">
+      <i class="ti ti-clock"></i>
+      <div class="deadline-text">
+        <strong>Prazo para aprovação: 21 de junho (amanhã).</strong><br>
+        Revise cada post abaixo e nos diga o que acha. Após o prazo, a produção pode ser impactada.
+      </div>
+    </div>
+  </div>
+
+  <div class="section-header">
+    <div class="section-label">Revise cada post abaixo</div>
+    <div class="progress-wrap"><div class="progress-fill" id="progress-fill"></div></div>
+    <div class="progress-label" id="progress-label">0 de 5 posts revisados</div>
+  </div>
+
+  <div id="posts-container"></div>
+
+  <div class="summary-block" id="summary-block">
+    <div class="summary-title">Resumo da sua revisão</div>
+    <div class="summary-row"><span>Posts aprovados</span><span id="sum-approved">—</span></div>
+    <div class="summary-row"><span>Posts com ajuste</span><span id="sum-adjust">—</span></div>
+    <div class="summary-row"><span>Pendentes</span><span id="sum-pending">—</span></div>
+    <button class="btn-finalize" id="btn-finalize" onclick="finalizar()" disabled>
+      <i class="ti ti-send"></i> Enviar revisão para a Savera
+    </button>
+    <div class="finalize-hint" id="finalize-hint">Revise todos os posts para liberar o envio.</div>
+    <div class="error-msg" id="error-msg">Ops, algo deu errado ao enviar. Tente novamente.</div>
+  </div>
+
+  <div class="sending-overlay" id="sending-overlay">
+    <i class="ti ti-loader ti-spin"></i>
+    <p>Enviando sua revisão...</p>
+  </div>
+
+  <div class="final-success" id="final-success">
+    <i class="ti ti-circle-check"></i>
+    <h2>Revisão enviada com sucesso!</h2>
+    <p>A equipe da Savera já recebeu suas respostas.<br>Entraremos em contato em breve para os próximos passos.</p>
+  </div>
+
+  <div class="footer">Savera Comunicação &bull; Este link é exclusivo para WOWLIVE</div>
+</div>
+
+<script>
+const WEBHOOK_URL = "https://hook.us2.make.com/visjp0sbp8e9uh8ckfucxsyvuvoauwml";
+const CLIENTE = "WOWLIVE";
+
+const posts = [
+  {
+    id: 0,
+    tema: "Como escolher o streamer certo para o seu evento",
+    formato: "Carrossel", formatoClass: "badge-carrossel",
+    data: "02/07/2026", dataNotion: "2026-07-02",
+    desenvolvimento: "Guia visual com os 5 critérios principais para contratar transmissão ao vivo: qualidade de imagem, estabilidade, suporte técnico, experiência e custo-benefício.",
+    material: { tipo: "desc", texto: "Enviar foto do equipamento utilizado nos eventos para ilustrar o post.", prazo: "28/06/2026" }
+  },
+  {
+    id: 1,
+    tema: "Bastidores: evento corporativo na última semana",
+    formato: "Reels", formatoClass: "badge-reels",
+    data: "07/07/2026", dataNotion: "2026-07-07",
+    desenvolvimento: "Vídeo mostrando os bastidores da produção, equipe em ação e o resultado final da transmissão. Tom: dinâmico e humanizado.",
+    material: { tipo: "desc", texto: "Enviar vídeo ou fotos dos bastidores do último evento realizado.", prazo: "01/07/2026" }
+  },
+  {
+    id: 2,
+    tema: "3 erros que comprometem sua transmissão ao vivo",
+    formato: "Carrossel", formatoClass: "badge-carrossel",
+    data: "14/07/2026", dataNotion: "2026-07-14",
+    desenvolvimento: "Conteúdo de autoridade listando os erros mais comuns em lives corporativas e como a WOWLIVE resolve cada um deles.",
+    material: { tipo: "nao" }
+  },
+  {
+    id: 3,
+    tema: "Depoimento: cliente fala sobre nossa entrega",
+    formato: "Reels", formatoClass: "badge-reels",
+    data: "18/07/2026", dataNotion: "2026-07-18",
+    desenvolvimento: "Depoimento em vídeo de cliente satisfeito. Tom: espontâneo e verdadeiro.",
+    material: { tipo: "desc", texto: "Enviar vídeo de depoimento de cliente.", prazo: "10/07/2026" }
+  },
+  {
+    id: 4,
+    tema: "Checklist do evento perfeito com transmissão",
+    formato: "Story", formatoClass: "badge-story",
+    data: "23/07/2026", dataNotion: "2026-07-23",
+    desenvolvimento: "Série de stories interativos com enquete e checklist. Objetivo: engajamento e coleta de leads via DM.",
+    material: { tipo: "nao" }
+  }
+];
+
+const state = {};
+posts.forEach(function(p) { state[p.id] = { status: "pending", feedback: "" }; });
+
+function materialHTML(mat) {
+  if (mat.tipo === "nao") {
+    return '<span class="material-nao"><i class="ti ti-x"></i> Não necessário</span>';
+  }
+  if (mat.tipo === "desc") {
+    return '<div class="material-block">' +
+      '<span class="field-label">Material necessário</span>' +
+      '<div class="material-desc-text"><i class="ti ti-alert-circle" style="margin-right:4px"></i>' + mat.texto + '</div>' +
+      (mat.prazo ? '<span class="material-prazo"><i class="ti ti-calendar-due"></i> Enviar até: ' + mat.prazo + '</span>' : '') +
+      '</div>';
+  }
+  return "";
+}
+
+function renderPosts() {
+  var container = document.getElementById("posts-container");
+  container.innerHTML = "";
+  posts.forEach(function(p) {
+    var s = state[p.id];
+    var card = document.createElement("div");
+    card.className = "post-card" + (s.status === "approved" ? " approved" : s.status === "adjust" ? " needs-adjust" : "");
+    card.id = "card-" + p.id;
+    var adjustContent = s.feedback
+      ? '<div class="adjust-sent"><i class="ti ti-check"></i><span>Ajuste anotado: "' + s.feedback + '"</span></div>'
+      : '<label for="at-' + p.id + '">O que precisa mudar neste post?</label><textarea id="at-' + p.id + '" placeholder="Ex: mudar a data, trocar o formato..."></textarea><button class="btn-send-adjust" onclick="enviarAjuste(' + p.id + ')">Confirmar ajuste</button>';
+
+    var materialSection = p.material.tipo === "nao"
+      ? '<div class="field field-full"><span class="field-label">Material necessário</span><div style="margin-top:5px">' + materialHTML(p.material) + '</div></div>'
+      : materialHTML(p.material);
+
+    card.innerHTML =
+      '<div class="post-header"><div class="post-title">' + p.tema + '</div><span class="badge ' + p.formatoClass + '">' + p.formato + '</span></div>' +
+      '<div class="post-fields">' +
+        '<div class="field"><span class="field-label">Data de publicação</span><span class="field-value">' + p.data + '</span></div>' +
+        '<div class="field field-full field-dev"><span class="field-label">Desenvolvimento</span><span class="field-value">' + p.desenvolvimento + '</span></div>' +
+        materialSection +
+      '</div>' +
+      '<div class="divider"></div>' +
+      '<div class="post-actions">' +
+        '<button class="btn-approve" onclick="aprovarPost(' + p.id + ')" ' + (s.status === "approved" ? 'disabled' : '') + '><i class="ti ti-circle-check"></i>' + (s.status === "approved" ? 'Aprovado' : 'Aprovar este post') + '</button>' +
+        '<button class="btn-adjust' + (s.status === "adjust" ? ' active' : '') + '" onclick="toggleAjuste(' + p.id + ')"><i class="ti ti-edit"></i> Pedir ajuste</button>' +
+        (s.status === "approved" ? '<span class="status-chip chip-approved"><i class="ti ti-check"></i> Aprovado</span>' : '') +
+        (s.status === "adjust" && s.feedback ? '<span class="status-chip chip-adjust"><i class="ti ti-message"></i> Ajuste anotado</span>' : '') +
+      '</div>' +
+      '<div class="adjust-panel' + (s.status === "adjust" ? ' open' : '') + '" id="ap-' + p.id + '">' + adjustContent + '</div>';
+    container.appendChild(card);
+  });
+  updateProgress();
+}
+
+function aprovarPost(id) { state[id].status = "approved"; state[id].feedback = ""; renderPosts(); }
+
+function toggleAjuste(id) {
+  if (state[id].status === "adjust" && state[id].feedback) return;
+  state[id].status = "adjust";
+  renderPosts();
+  setTimeout(function() {
+    var panel = document.getElementById("ap-" + id);
+    if (panel) panel.classList.add("open");
+    var ta = document.getElementById("at-" + id);
+    if (ta) ta.focus();
+  }, 50);
+}
+
+function enviarAjuste(id) {
+  var ta = document.getElementById("at-" + id);
+  if (!ta || !ta.value.trim()) return;
+  state[id].feedback = ta.value.trim();
+  renderPosts();
+}
+
+function updateProgress() {
+  var total = posts.length;
+  var done = Object.values(state).filter(function(s) { return s.status !== "pending"; }).length;
+  var approved = Object.values(state).filter(function(s) { return s.status === "approved"; }).length;
+  var adjustDone = Object.values(state).filter(function(s) { return s.status === "adjust" && s.feedback; }).length;
+  var adjustPending = Object.values(state).filter(function(s) { return s.status === "adjust" && !s.feedback; }).length;
+  var pending = total - done;
+  var pct = Math.round((done / total) * 100);
+  document.getElementById("progress-fill").style.width = pct + "%";
+  document.getElementById("progress-label").textContent = done + " de " + total + " posts revisados";
+  if (done > 0) {
+    document.getElementById("summary-block").style.display = "block";
+    document.getElementById("sum-approved").textContent = approved + " post" + (approved !== 1 ? "s" : "");
+    document.getElementById("sum-adjust").textContent = adjustDone + " post" + (adjustDone !== 1 ? "s" : "");
+    document.getElementById("sum-pending").textContent = pending + " post" + (pending !== 1 ? "s" : "");
+    var allOk = done === total && adjustPending === 0;
+    document.getElementById("btn-finalize").disabled = !allOk;
+    document.getElementById("finalize-hint").style.display = allOk ? "none" : "block";
+  }
+}
+
+function finalizar() {
+  var btn = document.getElementById("btn-finalize");
+  btn.disabled = true;
+  document.getElementById("error-msg").style.display = "none";
+  document.getElementById("sending-overlay").style.display = "block";
+  var payload = {
+    cliente: CLIENTE, mes: "Julho 2026", mes_notion: "JULHO",
+    data_envio: new Date().toLocaleString("pt-BR"),
+    posts: posts.map(function(p) {
+      var s = state[p.id];
+      var partes = p.data.split("/");
+      return {
+        nome_post: "POST " + partes[0] + "/" + partes[1] + " - " + CLIENTE,
+        tema: p.tema, formato: p.formato.toUpperCase(),
+        data_publicacao: p.dataNotion, desenvolvimento: p.desenvolvimento,
+        material: p.material.tipo === "desc" ? p.material.texto : "",
+        prazo_material: p.material.prazo || "",
+        status: s.status === "approved" ? "APROVADO" : "PEDIR AJUSTE",
+        producao: s.status === "approved" ? "DESENVOLVER COPY" : "IDEIA",
+        feedback: s.feedback || ""
+      };
+    })
+  };
+  fetch(WEBHOOK_URL, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) })
+  .then(function() {
+    document.getElementById("sending-overlay").style.display = "none";
+    document.getElementById("summary-block").style.display = "none";
+    document.getElementById("posts-container").style.display = "none";
+    document.getElementById("final-success").style.display = "block";
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  })
+  .catch(function() {
+    document.getElementById("sending-overlay").style.display = "none";
+    document.getElementById("error-msg").style.display = "block";
+    btn.disabled = false;
+  });
+}
+
+renderPosts();
+</script>
+</body>
+</html>
