@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Aprovação de Planejamento — Savera Comunicação</title>
+<title>Aprovação de Planejamento — ASVERA Comunicação</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -96,13 +96,13 @@
 <body>
 <div class="page">
   <div class="header">
-    <div class="logo">Savera Comunicação</div>
-    <div class="client-name">WOWLIVE</div>
-    <div class="period">Planejamento de Julho 2026 &mdash; 5 posts</div>
+    <div class="logo">ASVERA Comunicação</div>
+    <div class="client-name">ARTHUR MARTINS CAETANO</div>
+    <div class="period">Planejamento de Agosto 2026 &mdash; 4 posts</div>
     <div class="deadline-bar">
       <i class="ti ti-clock"></i>
       <div class="deadline-text">
-        <strong>Prazo para aprovação: 21 de junho (amanhã).</strong><br>
+        <strong>Prazo para aprovação: 48h a partir do envio.</strong><br>
         Revise cada post abaixo e nos diga o que acha. Após o prazo, a produção pode ser impactada.
       </div>
     </div>
@@ -136,55 +136,48 @@
   <div class="final-success" id="final-success">
     <i class="ti ti-circle-check"></i>
     <h2>Revisão enviada com sucesso!</h2>
-    <p>A equipe da Savera já recebeu suas respostas.<br>Entraremos em contato em breve para os próximos passos.</p>
+    <p>A equipe da ASVERA já recebeu suas respostas.<br>Entraremos em contato em breve para os próximos passos.</p>
   </div>
 
-  <div class="footer">Savera Comunicação &bull; Este link é exclusivo para WOWLIVE</div>
+  <div class="footer">ASVERA Comunicação &bull; Este link é exclusivo para ARTHUR MARTINS CAETANO</div>
 </div>
 
 <script>
 const WEBHOOK_URL = "https://hook.us2.make.com/visjp0sbp8e9uh8ckfucxsyvuvoauwml";
-const CLIENTE = "WOWLIVE";
+const CLIENTE = "ARTHUR MARTINS CAETANO";
+const PLANEJAMENTO_ID = "39936ad9-78cf-81bb-af95-e307aab99aa1";
 
 const posts = [
   {
     id: 0,
-    tema: "Como escolher o streamer certo para o seu evento",
-    formato: "Carrossel", formatoClass: "badge-carrossel",
-    data: "02/07/2026", dataNotion: "2026-07-02",
-    desenvolvimento: "Guia visual com os 5 critérios principais para contratar transmissão ao vivo: qualidade de imagem, estabilidade, suporte técnico, experiência e custo-benefício.",
-    material: { tipo: "desc", texto: "Enviar foto do equipamento utilizado nos eventos para ilustrar o post.", prazo: "28/06/2026" }
+    tema: "3 erros que todo brasileiro comete ao tentar aprender inglês sozinho",
+    formato: "Reels", formatoClass: "badge-reels",
+    data: "03/08/2026", dataNotion: "2026-08-03",
+    desenvolvimento: "Vídeo falado direto pra câmera apontando os erros mais comuns (traduzir tudo ao pé da letra, não praticar oralidade, estudar só gramática) e como aulas particulares corrigem isso rápido.",
+    material: { tipo: "desc", texto: "Vídeo gravado pelo Arthur, ambiente com boa iluminação, 30-45 segundos.", prazo: "24/07/2026" }
   },
   {
     id: 1,
-    tema: "Bastidores: evento corporativo na última semana",
-    formato: "Reels", formatoClass: "badge-reels",
-    data: "07/07/2026", dataNotion: "2026-07-07",
-    desenvolvimento: "Vídeo mostrando os bastidores da produção, equipe em ação e o resultado final da transmissão. Tom: dinâmico e humanizado.",
-    material: { tipo: "desc", texto: "Enviar vídeo ou fotos dos bastidores do último evento realizado.", prazo: "01/07/2026" }
-  },
-  {
-    id: 2,
-    tema: "3 erros que comprometem sua transmissão ao vivo",
+    tema: "5 frases que só quem morou fora sabe (e a escola nunca ensina)",
     formato: "Carrossel", formatoClass: "badge-carrossel",
-    data: "14/07/2026", dataNotion: "2026-07-14",
-    desenvolvimento: "Conteúdo de autoridade listando os erros mais comuns em lives corporativas e como a WOWLIVE resolve cada um deles.",
+    data: "05/08/2026", dataNotion: "2026-08-05",
+    desenvolvimento: "Carrossel com expressões idiomáticas do dia a dia em inglês, tradução literal engraçada vs. o significado real.",
     material: { tipo: "nao" }
   },
   {
-    id: 3,
-    tema: "Depoimento: cliente fala sobre nossa entrega",
+    id: 2,
+    tema: "Depoimento de aluno: a virada de chave na fluência",
     formato: "Reels", formatoClass: "badge-reels",
-    data: "18/07/2026", dataNotion: "2026-07-18",
-    desenvolvimento: "Depoimento em vídeo de cliente satisfeito. Tom: espontâneo e verdadeiro.",
-    material: { tipo: "desc", texto: "Enviar vídeo de depoimento de cliente.", prazo: "10/07/2026" }
+    data: "10/08/2026", dataNotion: "2026-08-10",
+    desenvolvimento: "Depoimento gravado por um aluno satisfeito, focando na transformação de \"trava\" pra \"solto\" ao falar.",
+    material: { tipo: "desc", texto: "Vídeo do aluno (autorizado), 30-40 segundos.", prazo: "31/07/2026" }
   },
   {
-    id: 4,
-    tema: "Checklist do evento perfeito com transmissão",
-    formato: "Story", formatoClass: "badge-story",
-    data: "23/07/2026", dataNotion: "2026-07-23",
-    desenvolvimento: "Série de stories interativos com enquete e checklist. Objetivo: engajamento e coleta de leads via DM.",
+    id: 3,
+    tema: "Voltando às aulas: por que agosto é o melhor mês pra começar inglês",
+    formato: "Carrossel", formatoClass: "badge-carrossel",
+    data: "12/08/2026", dataNotion: "2026-08-12",
+    desenvolvimento: "Gancho sazonal (volta às aulas/rotina) + benefícios de aulas particulares x curso em grupo.",
     material: { tipo: "nao" }
   }
 ];
@@ -290,7 +283,8 @@ function finalizar() {
   document.getElementById("error-msg").style.display = "none";
   document.getElementById("sending-overlay").style.display = "block";
   var payload = {
-    cliente: CLIENTE, mes: "Julho 2026", mes_notion: "JULHO",
+    cliente: CLIENTE, mes: "Agosto 2026", mes_notion: "AGOSTO",
+    planejamento_id: PLANEJAMENTO_ID,
     data_envio: new Date().toLocaleString("pt-BR"),
     posts: posts.map(function(p) {
       var s = state[p.id];
