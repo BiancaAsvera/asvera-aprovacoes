@@ -97,8 +97,8 @@
 <div class="page">
   <div class="header">
     <div class="logo">ASVERA Comunicação</div>
-    <div class="client-name">ARTHUR MARTINS CAETANO</div>
-    <div class="period">Planejamento de Agosto 2026 &mdash; 4 posts</div>
+    <div class="client-name">PÁTIO URBANOVA MALL</div>
+    <div class="period">Planejamento de Agosto 2026 &mdash; 8 posts</div>
     <div class="deadline-bar">
       <i class="ti ti-clock"></i>
       <div class="deadline-text">
@@ -122,7 +122,7 @@
     <div class="summary-row"><span>Posts com ajuste</span><span id="sum-adjust">—</span></div>
     <div class="summary-row"><span>Pendentes</span><span id="sum-pending">—</span></div>
     <button class="btn-finalize" id="btn-finalize" onclick="finalizar()" disabled>
-      <i class="ti ti-send"></i> Enviar revisão para a Savera
+      <i class="ti ti-send"></i> Enviar revisão para a ASVERA
     </button>
     <div class="finalize-hint" id="finalize-hint">Revise todos os posts para liberar o envio.</div>
     <div class="error-msg" id="error-msg">Ops, algo deu errado ao enviar. Tente novamente.</div>
@@ -139,46 +139,78 @@
     <p>A equipe da ASVERA já recebeu suas respostas.<br>Entraremos em contato em breve para os próximos passos.</p>
   </div>
 
-  <div class="footer">ASVERA Comunicação &bull; Este link é exclusivo para ARTHUR MARTINS CAETANO</div>
+  <div class="footer">ASVERA Comunicação &bull; Este link é exclusivo para PÁTIO URBANOVA MALL</div>
 </div>
 
 <script>
 const WEBHOOK_URL = "https://hook.us2.make.com/visjp0sbp8e9uh8ckfucxsyvuvoauwml";
-const CLIENTE = "ARTHUR MARTINS CAETANO";
-const PLANEJAMENTO_ID = "39936ad9-78cf-81bb-af95-e307aab99aa1";
+const CLIENTE = "PÁTIO URBANOVA MALL";
+const PLANEJAMENTO_ID = "3a436ad9-78cf-8143-bb07-d94e5a8ee042";
 
 const posts = [
   {
     id: 0,
-    tema: "3 erros que todo brasileiro comete ao tentar aprender inglês sozinho",
+    tema: "Atualização da obra (bastidores/reta final)",
     formato: "Reels", formatoClass: "badge-reels",
-    data: "03/08/2026", dataNotion: "2026-08-03",
-    desenvolvimento: "Vídeo falado direto pra câmera apontando os erros mais comuns (traduzir tudo ao pé da letra, não praticar oralidade, estudar só gramática) e como aulas particulares corrigem isso rápido.",
-    material: { tipo: "desc", texto: "Vídeo gravado pelo Arthur, ambiente com boa iluminação, 30-45 segundos.", prazo: "24/07/2026" }
+    data: "04/08/2026", dataNotion: "2026-08-04",
+    desenvolvimento: "Reels com takes atualizados da obra mostrando o avanço desde o último registro (fachada, área externa, acabamentos). Corte de cena sugere a evolução do espaço sem precisar de imagens antigas lado a lado. Texto na tela reforça o ritmo de avanço da obra e a proximidade da conclusão. Fecha com CTA de contato para lojistas interessados em conhecer os espaços disponíveis.",
+    material: { tipo: "desc", texto: "Takes recentes da obra: fachada, área externa e detalhes de acabamento.", prazo: "23/07/2026" }
   },
   {
     id: 1,
-    tema: "5 frases que só quem morou fora sabe (e a escola nunca ensina)",
+    tema: "O raio que pode mudar o faturamento do seu negócio",
     formato: "Carrossel", formatoClass: "badge-carrossel",
-    data: "05/08/2026", dataNotion: "2026-08-05",
-    desenvolvimento: "Carrossel com expressões idiomáticas do dia a dia em inglês, tradução literal engraçada vs. o significado real.",
-    material: { tipo: "nao" }
+    data: "06/08/2026", dataNotion: "2026-08-06",
+    desenvolvimento: "Carrossel com abordagem geográfica e de mercado: mostra o que existe num raio de poucos minutos do Pátio Urbanova — bairros de alto padrão ao redor, fluxo diário garantido pelo Supermercado Villa Real vizinho, e baixa concorrência direta de comércio de conveniência na região. Constrói a lógica de decisão do investidor a partir do potencial de influência do ponto, não apenas do fluxo bruto de pessoas.",
+    material: { tipo: "desc", texto: "Foto aérea da localização e renders do projeto (já disponíveis).", prazo: "23/07/2026" }
   },
   {
     id: 2,
-    tema: "Depoimento de aluno: a virada de chave na fluência",
-    formato: "Reels", formatoClass: "badge-reels",
-    data: "10/08/2026", dataNotion: "2026-08-10",
-    desenvolvimento: "Depoimento gravado por um aluno satisfeito, focando na transformação de \"trava\" pra \"solto\" ao falar.",
-    material: { tipo: "desc", texto: "Vídeo do aluno (autorizado), 30-40 segundos.", prazo: "31/07/2026" }
+    tema: "Feliz Dia dos Pais",
+    formato: "Imagem Única", formatoClass: "badge-imagem",
+    data: "09/08/2026", dataNotion: "2026-08-09",
+    desenvolvimento: "Imagem única comemorativa conectada ao conceito de conveniência do mall — diferente do reel emocional já publicado em julho. Arte com render/foto do espaço combinada a uma frase que liga a data ao papel do pai como quem resolve tudo por perto: \"Todo pai merece ter tudo por perto.\" Composição com identidade visual do Pátio Urbanova.",
+    material: { tipo: "nao" }
   },
   {
     id: 3,
-    tema: "Voltando às aulas: por que agosto é o melhor mês pra começar inglês",
+    tema: "Negócios essenciais que todo bairro de alto padrão precisa",
     formato: "Carrossel", formatoClass: "badge-carrossel",
-    data: "12/08/2026", dataNotion: "2026-08-12",
-    desenvolvimento: "Gancho sazonal (volta às aulas/rotina) + benefícios de aulas particulares x curso em grupo.",
-    material: { tipo: "nao" }
+    data: "13/08/2026", dataNotion: "2026-08-13",
+    desenvolvimento: "Carrossel com segmentos evergreen, sem recorte sazonal: escolas de idiomas/cursos, pet care especializado, serviços profissionais (contabilidade, escritórios), farmácia e bem-estar. Cada slide apresenta o segmento com gancho reforçando a demanda constante do bairro. Fecha com CTA de contato para lojistas desses segmentos.",
+    material: { tipo: "desc", texto: "Renders/fotos do projeto (já disponíveis).", prazo: "27/07/2026" }
+  },
+  {
+    id: 4,
+    tema: "Sons do Pátio Urbanova",
+    formato: "Reels", formatoClass: "badge-reels",
+    data: "18/08/2026", dataNotion: "2026-08-18",
+    desenvolvimento: "Reel sensorial usando sons reais da obra (furadeira, vidro sendo instalado, passos no piso, ferramentas) como trilha, sem música. Texto na tela nomeia o que está nascendo em cada som — por exemplo, \"Isso é uma vitrine ganhando forma.\" Formato curioso e diferente dos demais, feito só com áudio ambiente e takes.",
+    material: { tipo: "desc", texto: "Takes com áudio ambiente real da obra, sem cortes para música.", prazo: "03/08/2026" }
+  },
+  {
+    id: 5,
+    tema: "Por que o Urbanova está no radar dos investidores",
+    formato: "Carrossel", formatoClass: "badge-carrossel",
+    data: "20/08/2026", dataNotion: "2026-08-20",
+    desenvolvimento: "Carrossel com foco no público investidor, abordando a valorização do bairro, o perfil de renda dos moradores e a escassez de oferta comercial na região. Tom consultivo e de mercado, com argumentos qualitativos de posicionamento. Fecha com CTA de contato para quem quer garantir espaço.",
+    material: { tipo: "desc", texto: "Renders do projeto e foto aérea da localização (já disponíveis).", prazo: "03/08/2026" }
+  },
+  {
+    id: 6,
+    tema: "Detalhes de acabamento e arquitetura",
+    formato: "Reels", formatoClass: "badge-reels",
+    data: "25/08/2026", dataNotion: "2026-08-25",
+    desenvolvimento: "Reel com takes em close nos detalhes de acabamento da obra: vidro, piso, iluminação e materiais nobres usados na fachada. Texto na tela reforça a ideia de que os detalhes de acabamento contam a história do que esse lugar vai ser, conectando qualidade de execução com percepção de valor.",
+    material: { tipo: "desc", texto: "Takes em close de acabamentos: vidro, piso, iluminação, fachada.", prazo: "10/08/2026" }
+  },
+  {
+    id: 7,
+    tema: "Post de engajamento (teaser/marcação)",
+    formato: "Reels", formatoClass: "badge-reels",
+    data: "27/08/2026", dataNotion: "2026-08-27",
+    desenvolvimento: "Reel leve fechando o mês, usando take estético do espaço com texto de provocação/mistério sobre o que vem a seguir. CTA direto de marcação: \"Marca aqui quem merece ter um espaço no Pátio Urbanova.\" Gera comentários e compartilhamento.",
+    material: { tipo: "desc", texto: "Takes estéticos do espaço (área externa ou fachada).", prazo: "10/08/2026" }
   }
 ];
 
