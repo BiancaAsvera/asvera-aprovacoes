@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aprovação de Planejamento — Luana Petry — ASVERA Comunicação</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Inter', sans-serif; background: #F7F7F5; color: #1a1a1a; min-height: 100vh; }
+  .page { max-width: 680px; margin: 0 auto; padding: 2.5rem 1.25rem 4rem; }
+  .header { margin-bottom: 2rem; }
+  .logo { font-size: 11px; font-weight: 600; color: #888; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1rem; }
+  .client-name { font-size: 26px; font-weight: 600; color: #111; margin-bottom: 0.2rem; }
+  .period { font-size: 15px; color: #666; margin-bottom: 1.25rem; }
+  .deadline-bar { background: #FEF3CD; border: 1px solid #F5D97A; border-radius: 10px; padding: 12px 16px; display: flex; align-items: flex-start; gap: 10px; }
+  .deadline-bar i { font-size: 18px; color: #B8860B; flex-shrink: 0; margin-top: 1px; }
+  .deadline-text { font-size: 14px; color: #7A5A00; line-height: 1.5; }
+  .deadline-text strong { font-weight: 600; }
+  .section-header { margin: 2rem 0 0.75rem; }
+  .section-label { font-size: 11px; font-weight: 600; color: #888; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.5rem; }
+  .progress-wrap { height: 5px; background: #E5E5E0; border-radius: 99px; margin-bottom: 0.4rem; }
+  .progress-fill { height: 5px; border-radius: 99px; background: #1D9E75; transition: width 0.4s ease; width: 0%; }
+  .progress-label { font-size: 13px; color: #888; margin-bottom: 1.25rem; }
+  .post-card { background: #fff; border: 1px solid #E8E8E3; border-radius: 14px; padding: 1.25rem; margin-bottom: 0.875rem; transition: border-color 0.2s, background 0.2s; }
+  .post-card.approved { border-color: #1D9E75; background: #F4FBF8; }
+  .post-card.needs-adjust { border-color: #378ADD; background: #F0F7FF; }
+  .post-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 1rem; }
+  .post-title { font-size: 15px; font-weight: 600; color: #111; line-height: 1.4; }
+  .badge { font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 20px; flex-shrink: 0; white-space: nowrap; }
+  .badge-reels { background: #E6F1FB; color: #0C447C; }
+  .badge-carrossel { background: #EAF3DE; color: #27500A; }
+  .badge-story { background: #FBEAF0; color: #72243E; }
+  .badge-imagem { background: #F1EFE8; color: #444441; }
+  .post-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 20px; margin-bottom: 1rem; }
+  .field { display: flex; flex-direction: column; gap: 3px; }
+  .field-label { font-size: 10px; font-weight: 600; color: #aaa; text-transform: uppercase; letter-spacing: 0.07em; }
+  .field-value { font-size: 14px; color: #333; }
+  .field-full { grid-column: 1 / -1; }
+  .field-dev { background: #F7F7F5; border-radius: 8px; padding: 10px 12px; }
+  .field-dev .field-value { font-size: 13px; color: #555; line-height: 1.65; }
+  .material-block { grid-column: 1 / -1; background: #FEF3CD; border: 1px solid #F5D97A; border-radius: 8px; padding: 10px 12px; }
+  .material-block .field-label { color: #7A5A00; margin-bottom: 4px; }
+  .material-desc-text { font-size: 13px; color: #633806; line-height: 1.5; margin-bottom: 6px; }
+  .material-prazo { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 600; color: #7A5A00; background: #fff; border: 1px solid #F5D97A; padding: 3px 10px; border-radius: 20px; margin-top: 2px; }
+  .material-nao { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 500; padding: 4px 10px; border-radius: 20px; background: #F1EFE8; color: #5F5E5A; }
+  .divider { height: 1px; background: #F0F0EC; margin: 1rem 0; }
+  .post-actions { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+  .btn-approve { font-size: 13px; font-weight: 600; padding: 8px 16px; border-radius: 8px; cursor: pointer; border: none; display: inline-flex; align-items: center; gap: 6px; background: #1D9E75; color: #fff; transition: opacity 0.15s; }
+  .btn-approve:hover:not(:disabled) { opacity: 0.85; }
+  .btn-approve:disabled { opacity: 0.65; cursor: default; }
+  .btn-adjust { font-size: 13px; font-weight: 500; padding: 8px 16px; border-radius: 8px; cursor: pointer; background: #fff; color: #333; border: 1px solid #D5D5D0; display: inline-flex; align-items: center; gap: 6px; transition: background 0.15s; }
+  .btn-adjust:hover { background: #F7F7F5; }
+  .btn-adjust.active { background: #E6F1FB; color: #0C447C; border-color: #378ADD; }
+  .status-chip { font-size: 12px; font-weight: 500; padding: 4px 10px; border-radius: 20px; margin-left: auto; display: inline-flex; align-items: center; gap: 4px; }
+  .chip-approved { background: #EAF3DE; color: #27500A; }
+  .chip-adjust { background: #E6F1FB; color: #0C447C; }
+  .adjust-panel { display: none; margin-top: 1rem; border-top: 1px solid #F0F0EC; padding-top: 1rem; }
+  .adjust-panel.open { display: block; }
+  .adjust-panel label { font-size: 13px; color: #666; display: block; margin-bottom: 6px; }
+  .adjust-panel textarea { width: 100%; min-height: 90px; font-size: 13px; font-family: 'Inter', sans-serif; padding: 10px 12px; border: 1px solid #D5D5D0; border-radius: 8px; background: #fff; color: #111; resize: vertical; outline: none; transition: border-color 0.15s; }
+  .adjust-panel textarea:focus { border-color: #378ADD; }
+  .btn-send-adjust { margin-top: 8px; font-size: 13px; font-weight: 600; padding: 8px 16px; border-radius: 8px; cursor: pointer; background: #1D3557; color: #fff; border: none; transition: opacity 0.15s; }
+  .btn-send-adjust:hover { opacity: 0.85; }
+  .adjust-sent { font-size: 13px; color: #185FA5; display: flex; align-items: flex-start; gap: 6px; background: #E6F1FB; padding: 10px 12px; border-radius: 8px; line-height: 1.5; }
+  .adjust-sent i { flex-shrink: 0; margin-top: 1px; }
+  .summary-block { display: none; background: #fff; border: 1px solid #E8E8E3; border-radius: 14px; padding: 1.5rem; margin-top: 2rem; }
+  .summary-title { font-size: 16px; font-weight: 600; color: #111; margin-bottom: 1rem; }
+  .summary-row { display: flex; justify-content: space-between; align-items: center; font-size: 14px; color: #666; padding: 8px 0; border-bottom: 1px solid #F0F0EC; }
+  .summary-row:last-of-type { border-bottom: none; margin-bottom: 1rem; }
+  .summary-row span:last-child { font-weight: 600; color: #111; }
+  .btn-finalize { width: 100%; font-size: 15px; font-weight: 600; padding: 14px; border-radius: 10px; cursor: pointer; background: #1D9E75; color: #fff; border: none; display: flex; align-items: center; justify-content: center; gap: 8px; transition: opacity 0.15s; }
+  .btn-finalize:disabled { opacity: 0.35; cursor: not-allowed; }
+  .btn-finalize:hover:not(:disabled) { opacity: 0.88; }
+  .finalize-hint { font-size: 12px; color: #aaa; text-align: center; margin-top: 8px; }
+  .sending-overlay { display: none; text-align: center; padding: 2rem; }
+  .sending-overlay i { font-size: 36px; color: #1D9E75; margin-bottom: 12px; display: block; }
+  .sending-overlay p { font-size: 15px; color: #555; }
+  .final-success { display: none; background: #F4FBF8; border: 1px solid #1D9E75; border-radius: 14px; padding: 2.5rem 2rem; text-align: center; margin-top: 2rem; }
+  .final-success i { font-size: 48px; color: #1D9E75; margin-bottom: 12px; display: block; }
+  .final-success h2 { font-size: 20px; font-weight: 600; color: #0F6E56; margin-bottom: 8px; }
+  .final-success p { font-size: 14px; color: #3B6D11; line-height: 1.6; }
+  .error-msg { display: none; background: #FFF0F0; border: 1px solid #F09595; border-radius: 10px; padding: 1rem 1.25rem; margin-top: 1rem; font-size: 14px; color: #A32D2D; text-align: center; }
+  .footer { margin-top: 3rem; text-align: center; font-size: 12px; color: #bbb; }
+  @media (max-width: 500px) {
+    .post-fields { grid-template-columns: 1fr; }
+    .field-full { grid-column: 1; }
+    .post-actions { flex-direction: column; align-items: stretch; }
+    .status-chip { margin-left: 0; justify-content: center; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="header">
+    <div class="logo">ASVERA Comunicação</div>
+    <div class="client-name">LUANA PETRY</div>
+    <div class="period">Planejamento de Setembro 2026 &mdash; 6 posts</div>
+    <div class="deadline-bar">
+      <i class="ti ti-clock"></i>
+      <div class="deadline-text">
+        <strong>Prazo para aprovação: 48h a partir do envio.</strong><br>
+        Revise cada post abaixo e, caso queira alguma alteração, clique no botão "Pedir ajuste". Após o prazo, a produção será impactada e a entrega/postagem mensal ficará comprometida.
+      </div>
+    </div>
+  </div>
+
+  <div class="section-header">
+    <div class="section-label">Revise cada post abaixo</div>
+    <div class="progress-wrap"><div class="progress-fill" id="progress-fill"></div></div>
+    <div class="progress-label" id="progress-label">0 de 5 posts revisados</div>
+  </div>
+
+  <div id="posts-container"></div>
+
+  <div class="summary-block" id="summary-block">
+    <div class="summary-title">Resumo da sua revisão</div>
+    <div class="summary-row"><span>Posts aprovados</span><span id="sum-approved">—</span></div>
+    <div class="summary-row"><span>Posts com ajuste</span><span id="sum-adjust">—</span></div>
+    <div class="summary-row"><span>Pendentes</span><span id="sum-pending">—</span></div>
+    <button class="btn-finalize" id="btn-finalize" onclick="finalizar()" disabled>
+      <i class="ti ti-send"></i> Enviar revisão para a ASVERA
+    </button>
+    <div class="finalize-hint" id="finalize-hint">Revise todos os posts para liberar o envio.</div>
+    <div class="error-msg" id="error-msg">Ops, algo deu errado ao enviar. Tente novamente.</div>
+  </div>
+
+  <div class="sending-overlay" id="sending-overlay">
+    <i class="ti ti-loader ti-spin"></i>
+    <p>Enviando sua revisão...</p>
+  </div>
+
+  <div class="final-success" id="final-success">
+    <i class="ti ti-circle-check"></i>
+    <h2>Revisão enviada com sucesso!</h2>
+    <p>A equipe da ASVERA já recebeu suas respostas.<br>Entraremos em contato em breve para os próximos passos.</p>
+  </div>
+
+  <div class="footer">ASVERA Comunicação &bull; Este link é exclusivo para LUANA PETRY</div>
+</div>
+
+<script>
+const WEBHOOK_URL = "https://hook.us2.make.com/visjp0sbp8e9uh8ckfucxsyvuvoauwml";
+const CLIENTE = "LUANA PETRY";
+const PLANEJAMENTO_ID = "3bb36ad9-78cf-8184-9f45-c0ef9142647b";
+
+const posts = [
+  {
+    id: 0,
+    tema: "14 latas de atum podem te fazer chegar no seu objetivo de emagrecimento",
+    formato: "Carrossel", formatoClass: "badge-carrossel",
+    data: "02/09/2026", dataNotion: "2026-09-02",
+    desenvolvimento: "Uma paciente da Luana está fazendo o plano alimentar junto com o marido. Os dois decidiram comprar antecipadamente tudo o que precisavam para cumprir o plano alimentar de duas semanas, e deixar praticamente tudo pronto em casa. Um dos itens foi o lanche da tarde, que no plano dela é um patê de atum, por isso compraram várias latas de uma vez. O ponto do carrossel não é o atum, e sim a organização e a antecipação dentro do plano alimentar: isso aumenta muito a chance de cumprir a dieta e as refeições no dia a dia.",
+    material: { tipo: "desc", texto: "Foto real das 14 latas de atum (capa do carrossel).", prazo: "14/08/2026" }
+  },
+  {
+    id: 1,
+    tema: "Não quero jantar de noite, quero comer um lanche: monte seu hambúrguer caseiro e continue na dieta",
+    formato: "Reels", formatoClass: "badge-reels",
+    data: "07/09/2026", dataNotion: "2026-09-07",
+    desenvolvimento: "Reels com texto na tela e música. A Luana grava o passo a passo de um hambúrguer caseiro que serve como lanche noturno saboroso e alinhado ao plano alimentar, mostrando que é possível ter esse tipo de refeição à noite sem sair da dieta.",
+    material: { tipo: "desc", texto: "Vídeo da Luana preparando a receita do hambúrguer caseiro.", prazo: "21/08/2026" }
+  },
+  {
+    id: 2,
+    tema: "Meu noivo estava só comendo pão de queijo no trabalho, e eu, como nutri, fiquei desesperada",
+    formato: "Reels", formatoClass: "badge-reels",
+    data: "14/09/2026", dataNotion: "2026-09-14",
+    desenvolvimento: "A Luana grava contando que o noivo estava se alimentando apenas de pão de queijo no trabalho, o que a deixou preocupada como nutricionista, e mostra o que fez: uma receita de torta salgada dividida em porções para ele levar para o trabalho, com boa quantidade de proteína. A receita completa entra na legenda assim que a Luana enviar as informações.",
+    material: { tipo: "desc", texto: "Vídeo da Luana preparando a receita da torta salgada. Receita completa (para a legenda) ainda pendente de envio pela Luana.", prazo: "28/08/2026" }
+  },
+  {
+    id: 3,
+    tema: "O seu erro é querer ser igual a ela",
+    formato: "Carrossel", formatoClass: "badge-carrossel",
+    data: "17/09/2026", dataNotion: "2026-09-17",
+    desenvolvimento: "Carrossel com foto de referência de uma famosa fitness na capa. Explica que essas famosas geralmente têm rotina, tempo e ajuda muito diferentes da realidade da maioria das pessoas (sem trânsito, sem transporte público, sem 8h de trabalho, com ajuda em casa e com os filhos), por isso não faz sentido comparar o corpo e a dieta dela com a sua. Fecha reforçando: trabalhe com o que você tem hoje.",
+    material: { tipo: "nao" }
+  },
+  {
+    id: 4,
+    tema: "Desafio de emagrecimento entre os padrinhos do casamento",
+    formato: "Reels", formatoClass: "badge-reels",
+    data: "24/09/2026", dataNotion: "2026-09-24",
+    desenvolvimento: "Storytelling em vídeo de tela dividida: a Luana narra, e do outro lado aparecem fotos do casamento e do grupo do WhatsApp do desafio. Gancho: ela foi convidada para ser madrinha de uma paciente e amiga, e entre os padrinhos muitos queriam mudar a rotina de alimentação, saúde e até emagrecer. Ela conta como topou fazer um desafio de emagrecimento com eles. Finalização, servindo também de aquecimento para grupos: o que faz diferença não é só a dieta, é ter um grupo puxando junto, questionando se não é isso que falta para quem está vendo, e se gostaria de participar de um grupo para se impulsionar.",
+    material: { tipo: "desc", texto: "Vídeo de tela dividida com a Luana narrando, mais fotos do casamento e do grupo do WhatsApp do desafio.", prazo: "04/09/2026" }
+  },
+  {
+    id: 5,
+    tema: "Bate-papo sem roteiro com paciente",
+    formato: "Reels", formatoClass: "badge-reels",
+    data: "30/09/2026", dataNotion: "2026-09-30",
+    desenvolvimento: "Conversa descontraída e sem roteiro entre a Luana e uma paciente engajada que aceite participar, com cortes no vídeo final. Perguntas guiam a conversa (o que fez procurar uma nutricionista, como foi a adaptação, dificuldades, resultados, entre outras), trazendo o conhecimento da Luana, o resultado da paciente e a proximidade da Luana com quem ela atende.",
+    material: { tipo: "desc", texto: "Vídeo do bate-papo entre a Luana e a paciente.", prazo: "11/09/2026" }
+  }
+];
+
+const state = {};
+posts.forEach(function(p) { state[p.id] = { status: "pending", feedback: "" }; });
+
+function materialHTML(mat) {
+  if (mat.tipo === "nao") {
+    return '<span class="material-nao"><i class="ti ti-x"></i> Não necessário</span>';
+  }
+  if (mat.tipo === "desc") {
+    return '<div class="material-block">' +
+      '<span class="field-label">Material necessário</span>' +
+      '<div class="material-desc-text"><i class="ti ti-alert-circle" style="margin-right:4px"></i>' + mat.texto + '</div>' +
+      (mat.prazo ? '<span class="material-prazo"><i class="ti ti-calendar-due"></i> Enviar até: ' + mat.prazo + '</span>' : '') +
+      '</div>';
+  }
+  return "";
+}
+
+function renderPosts() {
+  var container = document.getElementById("posts-container");
+  container.innerHTML = "";
+  posts.forEach(function(p) {
+    var s = state[p.id];
+    var card = document.createElement("div");
+    card.className = "post-card" + (s.status === "approved" ? " approved" : s.status === "adjust" ? " needs-adjust" : "");
+    card.id = "card-" + p.id;
+    var adjustContent = s.feedback
+      ? '<div class="adjust-sent"><i class="ti ti-check"></i><span>Ajuste anotado: "' + s.feedback + '"</span></div>'
+      : '<label for="at-' + p.id + '">O que precisa mudar neste post?</label><textarea id="at-' + p.id + '" placeholder="Ex: mudar a data, trocar o formato..."></textarea><button class="btn-send-adjust" onclick="enviarAjuste(' + p.id + ')">Confirmar ajuste</button>';
+
+    var materialSection = p.material.tipo === "nao"
+      ? '<div class="field field-full"><span class="field-label">Material necessário</span><div style="margin-top:5px">' + materialHTML(p.material) + '</div></div>'
+      : materialHTML(p.material);
+
+    card.innerHTML =
+      '<div class="post-header"><div class="post-title">' + p.tema + '</div><span class="badge ' + p.formatoClass + '">' + p.formato + '</span></div>' +
+      '<div class="post-fields">' +
+        '<div class="field"><span class="field-label">Data de publicação</span><span class="field-value">' + p.data + '</span></div>' +
+        '<div class="field field-full field-dev"><span class="field-label">Desenvolvimento</span><span class="field-value">' + p.desenvolvimento + '</span></div>' +
+        materialSection +
+      '</div>' +
+      '<div class="divider"></div>' +
+      '<div class="post-actions">' +
+        '<button class="btn-approve" onclick="aprovarPost(' + p.id + ')" ' + (s.status === "approved" ? 'disabled' : '') + '><i class="ti ti-circle-check"></i>' + (s.status === "approved" ? 'Aprovado' : 'Aprovar este post') + '</button>' +
+        '<button class="btn-adjust' + (s.status === "adjust" ? ' active' : '') + '" onclick="toggleAjuste(' + p.id + ')"><i class="ti ti-edit"></i> Pedir ajuste</button>' +
+        (s.status === "approved" ? '<span class="status-chip chip-approved"><i class="ti ti-check"></i> Aprovado</span>' : '') +
+        (s.status === "adjust" && s.feedback ? '<span class="status-chip chip-adjust"><i class="ti ti-message"></i> Ajuste anotado</span>' : '') +
+      '</div>' +
+      '<div class="adjust-panel' + (s.status === "adjust" ? ' open' : '') + '" id="ap-' + p.id + '">' + adjustContent + '</div>';
+    container.appendChild(card);
+  });
+  updateProgress();
+}
+
+function aprovarPost(id) { state[id].status = "approved"; state[id].feedback = ""; renderPosts(); }
+
+function toggleAjuste(id) {
+  if (state[id].status === "adjust" && state[id].feedback) return;
+  state[id].status = "adjust";
+  renderPosts();
+  setTimeout(function() {
+    var panel = document.getElementById("ap-" + id);
+    if (panel) panel.classList.add("open");
+    var ta = document.getElementById("at-" + id);
+    if (ta) ta.focus();
+  }, 50);
+}
+
+function enviarAjuste(id) {
+  var ta = document.getElementById("at-" + id);
+  if (!ta || !ta.value.trim()) return;
+  state[id].feedback = ta.value.trim();
+  renderPosts();
+}
+
+function updateProgress() {
+  var total = posts.length;
+  var done = Object.values(state).filter(function(s) { return s.status !== "pending"; }).length;
+  var approved = Object.values(state).filter(function(s) { return s.status === "approved"; }).length;
+  var adjustDone = Object.values(state).filter(function(s) { return s.status === "adjust" && s.feedback; }).length;
+  var adjustPending = Object.values(state).filter(function(s) { return s.status === "adjust" && !s.feedback; }).length;
+  var pending = total - done;
+  var pct = Math.round((done / total) * 100);
+  document.getElementById("progress-fill").style.width = pct + "%";
+  document.getElementById("progress-label").textContent = done + " de " + total + " posts revisados";
+  if (done > 0) {
+    document.getElementById("summary-block").style.display = "block";
+    document.getElementById("sum-approved").textContent = approved + " post" + (approved !== 1 ? "s" : "");
+    document.getElementById("sum-adjust").textContent = adjustDone + " post" + (adjustDone !== 1 ? "s" : "");
+    document.getElementById("sum-pending").textContent = pending + " post" + (pending !== 1 ? "s" : "");
+    var allOk = done === total && adjustPending === 0;
+    document.getElementById("btn-finalize").disabled = !allOk;
+    document.getElementById("finalize-hint").style.display = allOk ? "none" : "block";
+  }
+}
+
+function finalizar() {
+  var btn = document.getElementById("btn-finalize");
+  btn.disabled = true;
+  document.getElementById("error-msg").style.display = "none";
+  document.getElementById("sending-overlay").style.display = "block";
+  var payload = {
+    cliente: CLIENTE, mes: "Agosto 2026", mes_notion: "AGOSTO",
+    planejamento_id: PLANEJAMENTO_ID,
+    data_envio: new Date().toLocaleString("pt-BR"),
+    posts: posts.map(function(p) {
+      var s = state[p.id];
+      var partes = p.data.split("/");
+      return {
+        nome_post: "POST " + partes[0] + "/" + partes[1] + " - " + CLIENTE,
+        tema: p.tema, formato: p.formato.toUpperCase(),
+        data_publicacao: p.dataNotion, desenvolvimento: p.desenvolvimento,
+        material: p.material.tipo === "desc" ? p.material.texto : "",
+        prazo_material: p.material.prazo || "",
+        status: s.status === "approved" ? "APROVADO" : "PEDIR AJUSTE",
+        producao: s.status === "approved" ? "DESENVOLVER COPY" : "IDEIA",
+        feedback: s.feedback || ""
+      };
+    })
+  };
+  fetch(WEBHOOK_URL, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) })
+  .then(function() {
+    document.getElementById("sending-overlay").style.display = "none";
+    document.getElementById("summary-block").style.display = "none";
+    document.getElementById("posts-container").style.display = "none";
+    document.getElementById("final-success").style.display = "block";
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  })
+  .catch(function() {
+    document.getElementById("sending-overlay").style.display = "none";
+    document.getElementById("error-msg").style.display = "block";
+    btn.disabled = false;
+  });
+}
+
+renderPosts();
+</script>
+</body>
+</html>
